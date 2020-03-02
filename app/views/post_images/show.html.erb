@@ -33,12 +33,13 @@
           <!-- コメント件数を表示する -->
           <li>
             <i class="fa fa-comment"></i>
-            <a href="#comments"><%= @post_image.post_comments.count %></a>
+            <a href="#comments">
+              <%= @post_image.post_comments.count %></a>
           </li>
           <div class="comment-list bt style-2" id="comments">
             <div class="float-wrapper">
               <h2 class="comment-count">
-                <%= @post_image.post_commnets.count %>件コメント</h2>
+                <%= @post_image.post_comments.count %>件コメント</h2>
               </div>
           <!-- コメント件数ここまで -->
 

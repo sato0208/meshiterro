@@ -16,9 +16,11 @@ class PostImagesController < ApplicationController
 		@post_images = PostImage.all
 	end
 
-	# 詳細画面が表紙されるように設定
 	def show
+	# 詳細画面が表紙されるように設定
 		@post_image = PostImage.find(params[:id])
+	# コメントのインスタンス変数を設定
+		@post_comment = PostComment.new
 	end
 
 	# 投稿データのストロングパラメーター
