@@ -10,62 +10,7 @@
 </div>
 <!-- ユーザのプロフィールここまで -->
 
-<!-- 画像の投稿に関する記述ここから -->
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
-    <div class="row">
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-          <div class="masonry-gutter"></div>
-          <!-- コントローラから渡されたpost_image変数内から一つずつ取り出して、post_image変数へ格納します。 -->
-          <% @post_images.each do |post_image| %>
-          <div class="masonry-block">
-            <div class="block block-image v1">
-              <div class="block-image">
-                <div class="view view-first">
-                  <!-- post_image変数のimage_idに保存された画像のimgタグを作成します -->
-                  <%= attachment_image_tag post_image,  :image %>
-                </div>
-              </div>
-              <div class="block-content">
-
-                <!-- 投稿に表示されるユーザ画像をプロフィール画像に -->
-                <%= attachment_image_tag post_image.user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
-                <h3 class="block-title">
-                  <%= link_to post_image_path(post_image.id) do %>
-
-
-                  
-                  <%= post_image.shop_name %>
-                  <% end %>
-                  <i class="fa fa-map-marker"></i>
-                  <!-- post_image変数のshop_nameカラムを表示します。 -->
-                  <!-- このカラムは、post_imageモデルに定義されています -->
-                  
-                </h3>
-                <!-- post_image変数のcaptionカラムを表示します。 -->
-                <!-- このカラムは、post_imageモデルに定義されています -->
-                <p><%= post_image.caption %></p>
-                <ul class="inline-meta">
-                  <li>By
-                    <!-- post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
-                    <!-- このカラムは、post_imageモデルに定義されています。 -->
-                    <%= post_image.user.name %>
-                  </li>
-                  <!-- 画像の投稿に関する記述ここまで -->
-
-                  <!-- コメントの件数を表示させる -->
-                  <li>
-                    <%= link_to "#{post_image.post_comments.count}コメント",post_image_path(post_image.id) %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <% end %>
-          <%= paginate @post_images, class:"paginate" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- 部分用テンプレートを呼び出すためにrenderを使用 -->
+<!-- post_images/listで部分テンプレートのパスを記述する。app/viewsより下のパスを記述する -->
+<!-- ローカル変数post_imagesに渡すインスタンス変数を指定するzo -->
+<%= render 'post_images/list', post_images: @post_images %>

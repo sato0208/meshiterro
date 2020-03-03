@@ -1,54 +1,5 @@
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
-    <div class="row">
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-          <div class="masonry-gutter"></div>
-          <!-- コントローラから渡されたpost_image変数内から一つずつ取り出して、post_image変数へ格納します。 -->
-          <% @post_images.each do |post_image| %>
-          <div class="masonry-block">
-            <div class="block block-image v1">
-              <div class="block-image">
-                <div class="view view-first">
-                  <!-- post_image変数のimage_idに保存された画像のimgタグを作成します -->
-                  <%= attachment_image_tag post_image,  :image %>
-                </div>
-              </div>
-              <div class="block-content">
-                <!-- プロフィール画像を反映させる -->
-                <%= attachment_image_tag post_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
 
-                <h3 class="block-title">
-                  <%= link_to post_image_path(post_image.id) do %>
-                  <!-- 一覧表に表示される店舗名（クリックしたら詳細に飛ぶ） -->
-                  <%= post_image.shop_name %>
-                  <% end %>
-                  <i class="fa fa-map-marker"></i>
-                  <!-- post_image変数のshop_nameカラムを表示 -->
-                  <!-- このカラムは、post_imageモデルに定義されています-->
-                  <!-- <%= post_image.shop_name %> -->
-                </h3>
-                <!-- post_image変数のcaptionカラムを表示 -->
-                <!-- このカラムは、post_imageモデルに定義されています -->
-                <!-- # <p><%= post_image.caption %></p> -->
-                <ul class="inline-meta">
-                  <li>By
-                    <!-- post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
-                    <!-- このカラムは、post_imageモデルに定義されています -->
-                    <%= post_image.user.name %>
-                  </li>
-                  <li>
-                    <!-- コメントの件数を表示させる -->
-                    <%= link_to "#{post_image.post_comments.count}コメント",post_image_path(post_image.id) %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <% end %>
-          <%= paginate @post_images, class:"paginate" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- 部分用テンプレートを呼び出すためにrenderを使用 -->
+<!-- post_images/listで部分テンプレートのパスを記述する。app/viewsより下のパスを記述する -->
+<!-- ローカル変数post_imagesに渡すインスタンス変数を指定する -->
+<%= render 'post_images/list', post_images:@post_images %>
