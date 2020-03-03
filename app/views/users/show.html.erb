@@ -1,9 +1,16 @@
 <!-- ユーザーのプロフィール -->
 <div class="profile-container">
   <h3 class="profile-name"><%= @user.name %></h3>
-  <%= image_tag('sample-author1.jpg', class:"img-circle pull-left profile-thumb", style:"width:100px; height:100px; margin-top:20px;") %>
+  <!-- attachment_image_tagによりプロフィール画像が表示される -->
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no-image.jpg" %>
+  <!-- 現在ユーザがログインしている場合 -->
+  <% if @user.id == current_user.id %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
+  <% end %>
 </div>
+<!-- ユーザのプロフィールここまで -->
 
+<!-- 画像の投稿に関する記述ここから -->
 <section class="sct-color-1 slice">
   <div class="container-fluid masonry-container">
     <div class="row">
@@ -21,7 +28,9 @@
                 </div>
               </div>
               <div class="block-content">
-                <%= image_tag('sample-author1.jpg', class: "img-circle pull-left profile-thumb") %>
+
+                <!-- 投稿に表示されるユーザ画像をプロフィール画像に -->
+                <%= attachment_image_tag post_image.user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
                 <h3 class="block-title">
                   <%= link_to post_image_path(post_image.id) do %>
                   <%= attachment_image_tag post_image, :image %>
@@ -41,8 +50,10 @@
                     <!-- このカラムは、post_imageモデルに定義されています。 -->
                     <%= post_image.user.name %>
                   </li>
-                  <li>
+                    <!-- 画像の投稿に関する記述ここまで -->
+
                     <!-- コメントの件数を表示させる -->
+                    <li>
                     <%= link_to "#{post_image.post_comments.count}コメント",post_image_path(post_image.id) %>
                   </li>
                 </ul>

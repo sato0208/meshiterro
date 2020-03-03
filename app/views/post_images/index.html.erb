@@ -15,24 +15,25 @@
                 </div>
               </div>
               <div class="block-content">
-                <%= image_tag('sample-author1.jpg', class: "img-circle pull-left profile-thumb") %>
+                <!-- プロフィール画像を反映させる -->
+                <%= attachment_image_tag post_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+
                 <h3 class="block-title">
                   <%= link_to post_image_path(post_image.id) do %>
                   <%= attachment_image_tag post_image, :image %>
                   <% end %>
                   <i class="fa fa-map-marker"></i>
-                  <!-- post_image変数のshop_nameカラムを表示します。 -->
-                  <!-- このカラムは、post_imageモデルに定義されています -->
+                  <!-- post_image変数のshop_nameカラムを表示 -->
+                  <!-- このカラムは、post_imageモデルに定義されています-->
                   <%= post_image.shop_name %>
-                  
                 </h3>
-                <!-- post_image変数のcaptionカラムを表示します。 -->
+                <!-- post_image変数のcaptionカラムを表示 -->
                 <!-- このカラムは、post_imageモデルに定義されています -->
                 <p><%= post_image.caption %></p>
                 <ul class="inline-meta">
                   <li>By
                     <!-- post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
-                    <!-- このカラムは、post_imageモデルに定義されています。 -->
+                    <!-- このカラムは、post_imageモデルに定義されています -->
                     <%= post_image.user.name %>
                   </li>
                   <li>
