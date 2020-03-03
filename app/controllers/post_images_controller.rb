@@ -30,6 +30,16 @@ class PostImagesController < ApplicationController
 		@post_comment = PostComment.new
 	end
 
+# 　	削除機能の実装
+	def destroy
+		# resourcesルーティングのdestroyで渡ってきたパラメーターを元に、
+		# findメソッドで削除データを探し@post_imageインスタンスに渡しています
+		@postimage = PostImage.find(params[:id])
+		# @post_imageインスタンスで渡されたデータをdestroyメソッドで削除しています
+		@postimage.destroy
+		redirect_to post_images_path
+	end
+
 	# 投稿データのストロングパラメーター
 private
     def post_image_params
