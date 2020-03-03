@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def update
   	# 変更結果を保存できるようにする
   	# ユーザーデータを一件取得しインスタンス変数へ渡す。
-  	@user = User.find(paramsk[:id])
+  	@user = User.find(params[:id])
   	# 編集したものをセーブする
   	@user.update(user_params)
   	# user_pathへリダイレクトする

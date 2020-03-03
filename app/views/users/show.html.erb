@@ -2,7 +2,7 @@
 <div class="profile-container">
   <h3 class="profile-name"><%= @user.name %></h3>
   <!-- attachment_image_tagによりプロフィール画像が表示される -->
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no-image.jpg" %>
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
   <!-- 現在ユーザがログインしている場合 -->
   <% if @user.id == current_user.id %>
   <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
@@ -33,12 +33,14 @@
                 <%= attachment_image_tag post_image.user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
                 <h3 class="block-title">
                   <%= link_to post_image_path(post_image.id) do %>
-                  <%= attachment_image_tag post_image, :image %>
+
+
+                  
+                  <%= post_image.shop_name %>
                   <% end %>
                   <i class="fa fa-map-marker"></i>
                   <!-- post_image変数のshop_nameカラムを表示します。 -->
                   <!-- このカラムは、post_imageモデルに定義されています -->
-                  <%= post_image.shop_name %>
                   
                 </h3>
                 <!-- post_image変数のcaptionカラムを表示します。 -->
@@ -50,10 +52,10 @@
                     <!-- このカラムは、post_imageモデルに定義されています。 -->
                     <%= post_image.user.name %>
                   </li>
-                    <!-- 画像の投稿に関する記述ここまで -->
+                  <!-- 画像の投稿に関する記述ここまで -->
 
-                    <!-- コメントの件数を表示させる -->
-                    <li>
+                  <!-- コメントの件数を表示させる -->
+                  <li>
                     <%= link_to "#{post_image.post_comments.count}コメント",post_image_path(post_image.id) %>
                   </li>
                 </ul>
